@@ -47,5 +47,4 @@ class script :
         return lua.eval(self.script)
     
     def meta_get(self, key):
-        print("Getting meta key: "+key)
         return self.meta.__getattribute__(key)
