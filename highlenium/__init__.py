@@ -60,7 +60,7 @@ def get_geckodriver():
 
 DRIVER = None
 
-def get_driver(type=None) :
+def get_driver(type=None, headless=False) :
     global DRIVER
     if DRIVER is None:
         if type is None :
