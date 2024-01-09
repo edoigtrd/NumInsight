@@ -24,24 +24,26 @@ def get_result_json(results) :
             r[k] = "Exception"
     return json.dumps(r, indent=4)
 
-if __name__ == "__main__" :
+if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("-n","--nuber", type=str, default="", help="Phone nuumber to check")
+    ap.add_argument("-n", "--number", type=str, default="", help="Phone number to check")
     ap.add_argument("-H", "--head", action="store_true", default=False, help="Headless mode")
     ap.add_argument("--driver", type=str, default="chrome", help="Driver to use (chrome, firefox)")
     ap.add_argument("--json", action="store_true", default=False, help="Output as json")
     args = vars(ap.parse_args())
 
-    params = {
-        "number": args["nuber"]
-    }
+    headless_param = args["head"]
+    params = {"number": args["number"]}
 
-    highlenium.get_driver(args["driver"])
+    highlenium.get_driver(args["driver"],headless=args["headless"])
+
+
+
     apps.set_params(params)
     results = apps.run()
-    if not args["json"] :
+    if not args["json"]:
         print_result(results)
-    else :
+    else:
         print(get_result_json(results))
 
 
