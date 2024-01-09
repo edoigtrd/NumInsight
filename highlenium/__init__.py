@@ -60,26 +60,29 @@ def get_geckodriver():
 
 DRIVER = None
 
-def get_driver(type=None) :
+def get_driver(type=None, headless=True) :
     global DRIVER
     if DRIVER is None:
         if type is None :
             raise RuntimeError("No driver type specified")
         elif type == "chrome" :
             chrome_options = Options()
-            chrome_options.add_argument("--headless")
+            if headless :
+                chrome_options.add_argument("--headless")
             chrome_options.add_argument("--incognito")
             service = ChromeService(executable_path=get_chromedriver(), options=chrome_options)
             DRIVER = webdriver.Chrome(service=service)
             DRIVER.__setattr__("find_element_by_css_selector", lambda selector : find_element_by_css_selector(DRIVER, selector))
         elif type == "firefox" :
             firefox_options = Options()
-            firefox_options.add_argument("--headless")
+            if headless :
+                firefox_options.add_argument("--headless")
             firefox_options.add_argument("--incognito")
             service = FirefoxService(executable_path=get_geckodriver())
             DRIVER = webdriver.Firefox(service=service, options=firefox_options)
             DRIVER.__setattr__("find_element_by_css_selector", lambda selector : find_element_by_css_selector(DRIVER, selector))
     return DRIVER
+
 
 def browseto(url) :
     get_driver().get(url)
