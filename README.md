@@ -1,3 +1,7 @@
+[![Windows](https://badgen.net/badge/icon/windows?icon=windows&label)](https://microsoft.com/windows/) ![Linux](https://img.shields.io/badge/Linux-FCC624.svg?style=for-the-badge&logo=Linux&logoColor=black) ![Issues](https://img.shields.io/github/issues/edoigtrd/NumInsight.svg) ![Action](https://github.com/edoigtrd/NumInsight/actions/workflows/main.yml/badge.svg
+)
+
+
 # NumInsight
 
 Numinsight is a HoleHe like project to query information about a phone number.
