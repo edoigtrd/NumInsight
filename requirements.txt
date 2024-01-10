@@ -1,0 +1,5 @@
+beautifulsoup4==4.10.0
+colorama==0.4.4
+lupa==2.0
+Requests==2.31.0
+selenium==4.16.0
