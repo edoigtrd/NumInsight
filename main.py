@@ -4,40 +4,47 @@ from apps import apps
 import colorama
 import json
 
-def print_result(apps) :
+
+def print_result(apps):
     colorama.init()
-    for i in apps :
-        if type(apps[i]) == bool :
-            if apps[i] :
+    for i in apps:
+        if type(apps[i]) == bool:
+            if apps[i]:
                 print(f"{colorama.Fore.GREEN}[✓] : {i}")
-            else :
+            else:
                 print(f"{colorama.Fore.RED}[𐄂] : {i}")
-        else :
+        else:
             print(f"{colorama.Fore.MAGENTA}[!] : {i}")
 
-def get_result_json(results) :
+
+def get_result_json(results):
     r = {}
-    for k,v in results.items():
-        if type(v) == bool :
+    for k, v in results.items():
+        if type(v) == bool:
             r[k] = v
-        else :
+        else:
             r[k] = "Exception"
     return json.dumps(r, indent=4)
 
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("-n", "--number", type=str, default="", help="Phone number to check")
-    ap.add_argument("-H", "--head", action="store_true", default=False, help="Headless mode")
-    ap.add_argument("--driver", type=str, default="chrome", help="Driver to use (chrome, firefox)")
+    ap.add_argument(
+        "-n", "--number", type=str, default="", help="Phone number to check"
+    )
+    ap.add_argument(
+        "-H", "--head", action="store_true", default=False, help="Headless mode"
+    )
+    ap.add_argument(
+        "--driver", type=str, default="chrome", help="Driver to use (chrome, firefox)"
+    )
     ap.add_argument("--json", action="store_true", default=False, help="Output as json")
     args = vars(ap.parse_args())
 
     headless_param = args["head"]
     params = {"number": args["number"]}
 
-    highlenium.get_driver(args["driver"],headless=args["headless"])
-
-
+    highlenium.get_driver(args["driver"], headless=args["headless"])
 
     apps.set_params(params)
     results = apps.run()
@@ -45,7 +52,3 @@ if __name__ == "__main__":
         print_result(results)
     else:
         print(get_result_json(results))
-
-
-
-    
